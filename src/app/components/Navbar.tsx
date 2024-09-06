@@ -2,6 +2,13 @@ import React from "react";
 import MobileMenu from "./MobileMenu";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
@@ -38,6 +45,55 @@ const Navbar = () => {
         </div>
       </div>
       {/* right */}
+      <div className="hidden md:block">
+        <ClerkLoading>
+          <div className="flex justify-center items-center h-screen">
+            <div className="rounded-full h-6 w-6 bg-slate-800 animate-ping"></div>
+          </div>
+        </ClerkLoading>
+        <ClerkLoaded>
+          <SignedIn>
+            <div className="flex gap-6 items-center">
+              <div className="cursor-pointer">
+                <Image
+                  src={"/people.png"}
+                  alt="People icon"
+                  width={20}
+                  height={20}
+                />
+              </div>
+              <div className="cursor-pointer">
+                <Image
+                  src={"/messages.png"}
+                  alt="People icon"
+                  width={20}
+                  height={20}
+                />
+              </div>
+              <div className="cursor-pointer">
+                <Image
+                  src={"/notifications.png"}
+                  alt="People icon"
+                  width={20}
+                  height={20}
+                />
+              </div>
+              <UserButton />
+            </div>
+          </SignedIn>
+          <SignedOut>
+            <div className="cursor-pointer flex gap-2 items-center">
+              <Image
+                src={"/login.png"}
+                alt="login icon"
+                width={16}
+                height={16}
+              />
+              <Link href={"/sign-in"}>Login/Register</Link>
+            </div>
+          </SignedOut>
+        </ClerkLoaded>
+      </div>
       <MobileMenu />
     </>
   );

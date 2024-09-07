@@ -34,7 +34,7 @@ const MobileMenu = () => {
             toggleMenu ? "opacity-100 " : "opacity-0"
           }`}
         >
-          <ul className="bg-slate-400 w-full h-[93vh] flex flex-col justify-center items-center gap-28">
+          <ul className="bg-slate-400 w-full h-[93vh] flex flex-col justify-center items-center gap-8">
             <li className="text-white font-bold">Home</li>
             <li className="text-white font-bold">Friends</li>
             <li className="text-white font-bold">Groups</li>

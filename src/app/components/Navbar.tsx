@@ -28,24 +28,25 @@ const Navbar = () => {
             <Image
               src={"/home.png"}
               alt="Homepage"
-              width={16}
-              height={16}
+              width={24}
+              height={24}
               className="w-4 h-4"
             />
             <span className="font-bold">Homepage</span>
           </Link>
           <Link href={"/friends"} className="flex items-center gap-2 ">
-            <Image src={"/friends.png"} alt="Homepage" width={16} height={16} />
+            <Image src={"/friends.png"} alt="Homepage" width={24} height={24} />
             <span className="font-bold">Friends</span>
           </Link>
           <Link href={"/stories"} className="flex items-center gap-2">
-            <Image src={"/stories.png"} alt="Homepage" width={16} height={16} />
+            <Image src={"/stories.png"} alt="Homepage" width={24} height={24} />
             <span className="font-bold">Stories</span>
           </Link>
         </div>
       </div>
       {/* right */}
-      <div className="hidden md:block">
+
+      <div className="w-[30%] flex items-center gap-4 xl:gap-8 justify-end">
         <ClerkLoading>
           <div className="flex justify-center items-center h-screen">
             <div className="rounded-full h-6 w-6 bg-slate-800 animate-ping"></div>
@@ -53,48 +54,26 @@ const Navbar = () => {
         </ClerkLoading>
         <ClerkLoaded>
           <SignedIn>
-            <div className="flex gap-6 items-center">
-              <div className="cursor-pointer">
-                <Image
-                  src={"/people.png"}
-                  alt="People icon"
-                  width={20}
-                  height={20}
-                />
-              </div>
-              <div className="cursor-pointer">
-                <Image
-                  src={"/messages.png"}
-                  alt="People icon"
-                  width={20}
-                  height={20}
-                />
-              </div>
-              <div className="cursor-pointer">
-                <Image
-                  src={"/notifications.png"}
-                  alt="People icon"
-                  width={20}
-                  height={20}
-                />
-              </div>
-              <UserButton />
+            <div className="cursor-pointer">
+              <Image src="/people.png" alt="" width={24} height={24} />
             </div>
+            <div className="cursor-pointer">
+              <Image src="/messages.png" alt="" width={24} height={24} />
+            </div>
+            <div className="cursor-pointer">
+              <Image src="/notifications.png" alt="" width={24} height={24} />
+            </div>
+            <UserButton />
           </SignedIn>
           <SignedOut>
-            <div className="cursor-pointer flex gap-2 items-center">
-              <Image
-                src={"/login.png"}
-                alt="login icon"
-                width={16}
-                height={16}
-              />
-              <Link href={"/sign-in"}>Login/Register</Link>
+            <div className="flex items-center gap-2 text-sm">
+              <Image src="/login.png" alt="" width={20} height={20} />
+              <Link href="/sign-in">Login/Register</Link>
             </div>
           </SignedOut>
         </ClerkLoaded>
+        <MobileMenu />
       </div>
-      <MobileMenu />
     </>
   );
 };

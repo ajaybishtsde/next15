@@ -4,7 +4,7 @@ import React from "react";
 const Stories = () => {
   return (
     <>
-      <div className="bg-white rounded-lg p-2 shadow-xl overflow-scroll text-xs hide-scroll">
+      <div className="bg-white rounded-lg p-4 shadow-xl text-xs overflow-x-auto hide-scroll">
         <div className="flex gap-8 w-max">
           <div className="flex flex-col items-center gap-2 cursor-pointer">
             <Image

@@ -30,8 +30,8 @@ const MobileMenu = () => {
           ></div>
         </div>
         <div
-          className={`h-[93vh] absolute left-0 top-[7vh] w-full transition-all duration-500 ease-in-out ${
-            toggleMenu ? "opacity-100 " : "opacity-0"
+          className={` ${
+            toggleMenu ? "h-[93vh] absolute left-0 top-[7vh] w-full" : "hidden"
           }`}
         >
           <ul className="bg-slate-400 w-full h-[93vh] flex flex-col justify-center items-center gap-8">

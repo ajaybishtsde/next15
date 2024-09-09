@@ -4,14 +4,14 @@ import React from "react";
 const AddPost = () => {
   return (
     <>
-      <div className="w-full rounded-xl p-4 bg-white">
+      <div className="w-full rounded-xl p-4 bg-white shadow-2xl">
         <div className="flex gap-6 w-full">
           <Image
             className="rounded-full h-12 w-12 ring-2"
             src="https://images.unsplash.com/photo-1725776339684-30dda601552e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxN3x8fGVufDB8fHx8fA%3D%3D"
             alt="profile"
-            width={12}
-            height={12}
+            width={48}
+            height={48}
           />
           <div className="flex-1 rounded-lg flex flex-col gap-4 ">
             <div className="flex gap-4 justify-evenly items-end flex-1 rounded-lg">

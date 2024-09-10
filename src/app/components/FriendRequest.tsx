@@ -55,7 +55,7 @@ const FriendRequest = () => {
               alt="user"
               className="w-10 h-10 rounded-full"
             />
-            <span className="font-medium">Hinata Hyuga's</span>
+            <span className="font-medium">Hinata Hyuga</span>
           </div>
           {/* accept or reject icon */}
           <div className="flex gap-4 items-center">

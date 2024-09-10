@@ -1,8 +1,7 @@
-import Link from "next/link";
 import Image from "next/image";
 
 import React from "react";
-const Add = ({ size }: { size: "sm" | "md" | "lg" }) => {
+const Add = () => {
   return (
     <>
       <div className="p-4 bg-white rounded-lg shadow-2xl text-sm flex flex-col gap-4">

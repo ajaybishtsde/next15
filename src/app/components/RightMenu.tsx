@@ -18,7 +18,7 @@ const RightMenu = ({ userId }: { userId?: string }) => {
         <>
           <FriendRequest />
           <Birthday />
-          <Add size="md" />
+          <Add />
         </>
       </div>
     </>

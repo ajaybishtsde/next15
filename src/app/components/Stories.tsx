@@ -16,7 +16,7 @@ const Stories = () => {
               height={80}
               className="w-20 h-20 rounded-full ring-2"
             />
-            <span className="font-semibold">Ajay</span>
+            <span className="font-semibold text-gray-600">Ajay</span>
           </div>
           <div className="flex flex-col items-center gap-2 cursor-pointer">
             <Image
@@ -28,7 +28,7 @@ const Stories = () => {
               height={80}
               className="w-20 h-20 rounded-full ring-2"
             />
-            <span className="font-semibold">Ajay</span>
+            <span className="font-semibold text-gray-600">Naruto</span>
           </div>
           <div className="flex flex-col items-center gap-2 cursor-pointer">
             <Image
@@ -40,7 +40,7 @@ const Stories = () => {
               height={80}
               className="w-20 h-20 rounded-full ring-2"
             />
-            <span className="font-semibold">Ajay</span>
+            <span className="font-semibold text-gray-600">Sasuke</span>
           </div>
           <div className="flex flex-col items-center gap-2 cursor-pointer">
             <Image
@@ -52,7 +52,7 @@ const Stories = () => {
               height={80}
               className="w-20 h-20 rounded-full ring-2"
             />
-            <span className="font-semibold">Ajay</span>
+            <span className="font-semibold text-gray-600">Itachi</span>
           </div>
           <div className="flex flex-col items-center gap-2 cursor-pointer">
             <Image
@@ -64,7 +64,7 @@ const Stories = () => {
               height={80}
               className="w-20 h-20 rounded-full ring-2"
             />
-            <span className="font-semibold">Ajay</span>
+            <span className="font-semibold text-gray-600">Kakshi</span>
           </div>
           <div className="flex flex-col items-center gap-2 cursor-pointer">
             <Image
@@ -76,7 +76,7 @@ const Stories = () => {
               height={80}
               className="w-20 h-20 rounded-full ring-2"
             />
-            <span className="font-semibold">Ajay</span>
+            <span className="font-semibold text-gray-600">Madara</span>
           </div>
           <div className="flex flex-col items-center gap-2 cursor-pointer">
             <Image
@@ -88,7 +88,7 @@ const Stories = () => {
               height={80}
               className="w-20 h-20 rounded-full ring-2"
             />
-            <span className="font-semibold">Ajay</span>
+            <span className="font-semibold text-gray-600">Orachimaru</span>
           </div>
           <div className="flex flex-col items-center gap-2 cursor-pointer">
             <Image
@@ -100,7 +100,7 @@ const Stories = () => {
               height={80}
               className="w-20 h-20 rounded-full ring-2"
             />
-            <span className="font-semibold">Ajay</span>
+            <span className="font-semibold text-gray-600">Minato</span>
           </div>
           <div className="flex flex-col items-center gap-2 cursor-pointer">
             <Image
@@ -112,7 +112,7 @@ const Stories = () => {
               height={80}
               className="w-20 h-20 rounded-full ring-2"
             />
-            <span className="font-semibold">Ajay</span>
+            <span className="font-semibold text-gray-600">Hinata</span>
           </div>
         </div>
       </div>

@@ -1,9 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MobileMenu = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
+  useEffect(() => {
+    if (toggleMenu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [toggleMenu]);
   return (
     <>
       <div className="md:hidden">
@@ -30,16 +41,20 @@ const MobileMenu = () => {
           ></div>
         </div>
         <div
+          // onClick={() => setToggleMenu((prev) => !prev)}
+          // onScroll={() => setToggleMenu((prev) => !prev)}
           className={` ${
-            toggleMenu ? "h-[93vh] absolute left-0 top-[7vh] w-full" : "hidden"
+            toggleMenu
+              ? "h-[93vh] absolute left-0 top-[7vh] w-full z-50"
+              : "hidden"
           }`}
         >
           <ul className="bg-slate-400 w-full h-[93vh] flex flex-col justify-center items-center gap-8">
-            <li className="text-white font-bold">Home</li>
-            <li className="text-white font-bold">Friends</li>
-            <li className="text-white font-bold">Groups</li>
-            <li className="text-white font-bold">Stories</li>
-            <li className="text-white font-bold">Login</li>
+            <li className="text-white font-bold cursor-pointer">Home</li>
+            <li className="text-white font-bold cursor-pointer">Friends</li>
+            <li className="text-white font-bold cursor-pointer">Groups</li>
+            <li className="text-white font-bold cursor-pointer">Stories</li>
+            <li className="text-white font-bold cursor-pointer">Login</li>
           </ul>
         </div>
       </div>

@@ -47,26 +47,26 @@ const Post = () => {
       {/* interaction */}
       <div className="flex items-center justify-between">
         <div className="flex gap-8">
-          <div className="flex bg-slate-100 gap-6 p-4 rounded-2xl">
+          <div className="flex items-center bg-slate-50 gap-2 rounded-2xl">
             <Image
               src={"/like.png"}
               alt="like"
-              width={18}
-              height={18}
-              className="cursor-pointer"
+              width={16}
+              height={16}
+              className="cursor-pointer h-4 w-4"
             />
             <span className="text-gray-400">|</span>
             <span className="text-gray-400">
               123 <span className="hidden md:inline">Likes</span>
             </span>
           </div>
-          <div className="flex bg-slate-100 gap-6 p-4 rounded-2xl">
+          <div className="flex items-center bg-slate-50 gap-2 rounded-2xl">
             <Image
               src={"/comment.png"}
               alt="comment"
-              width={18}
-              height={18}
-              className="cursor-pointer"
+              width={16}
+              height={16}
+              className="cursor-pointer h-4 w-4"
             />
             <span className="text-gray-400">|</span>
             <span className="text-gray-400">
@@ -74,20 +74,18 @@ const Post = () => {
             </span>
           </div>
         </div>
-        <div>
-          <div className="flex bg-slate-100 gap-6 p-4 rounded-2xl">
-            <Image
-              src={"/share.png"}
-              alt="share"
-              width={18}
-              height={18}
-              className="cursor-pointer"
-            />
-            <span className="text-gray-400">|</span>
-            <span className="text-gray-400">
-              123 <span className="hidden md:inline">Shares</span>
-            </span>
-          </div>
+        <div className="flex items-center bg-slate-50 gap-2 rounded-2xl">
+          <Image
+            src={"/share.png"}
+            alt="share"
+            width={16}
+            height={16}
+            className="cursor-pointer h-4 w-4"
+          />
+          <span className="text-gray-400">|</span>
+          <span className="text-gray-400">
+            123 <span className="hidden md:inline">Shares</span>
+          </span>
         </div>
       </div>
       <Comments />

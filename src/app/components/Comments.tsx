@@ -4,58 +4,55 @@ import React from "react";
 const Comments = () => {
   return (
     <>
-      <div>
-        {/* comments */}
-        <div className="flex gap-6 items-center mb-4">
-          <Image
-            src={
-              "https://images.unsplash.com/photo-1725695788066-34e372183231?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D"
-            }
-            alt="user"
-            width={32}
-            height={32}
-            className="w-8 h-8 rounded-full"
+      {/* comments */}
+      <div className="flex gap-4 items-center">
+        <Image
+          src={
+            "https://images.unsplash.com/photo-1725695788066-34e372183231?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D"
+          }
+          alt="user"
+          width={32}
+          height={32}
+          className="w-8 h-8 rounded-full"
+        />
+        <div className="flex justify-between items-center w-full bg-slate-50 rounded-xl">
+          <input
+            type="text"
+            name=""
+            id=""
+            className=" rounded-lg p-2 outline-none w-full bg-slate-50"
+            placeholder="Write a comment..."
           />
-          <div className="flex justify-between items-center flex-1 bg-slate-100 rounded-lg pe-4 ps-4">
-            <input
-              type="text"
-              name=""
-              id=""
-              className=" rounded-lg p-2 outline-none flex-1 bg-slate-100"
-              placeholder="Write a comment..."
-            />
-            <Image
-              src={"/emoji.png"}
-              alt="emoji"
-              width={12}
-              height={12}
-              className="w-4 h-4 cursor-pointer"
-            />
-          </div>
+          <Image
+            src={"/emoji.png"}
+            alt="emoji"
+            width={12}
+            height={12}
+            className="w-4 h-4 cursor-pointer"
+          />
         </div>
-        {/* other comments */}
-        <div className="flex gap-8 items-start">
-          <div className=" w-32">
-            <Image
-              src={
-                "https://images.unsplash.com/photo-1725695788066-34e372183231?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D"
-              }
-              alt="user"
-              width={40}
-              height={40}
-              className="w-10 h-10 rounded-full"
-            />
-          </div>
+      </div>
+      {/* other comments */}
+      <div className="flex gap-4 items-start justify-evenly mt-3 p-2">
+        <Image
+          src={
+            "https://images.unsplash.com/photo-1725695788066-34e372183231?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D"
+          }
+          alt="user"
+          width={40}
+          height={40}
+          className="w-10 h-10 rounded-full"
+        />
 
+        <div className="flex items-start justify-between">
           <div className="flex flex-col gap-2">
             {/* name */}
             <span>Uzumaki Naruto</span>
             {/* comment */}
-            <p>
+            <p className="text-sm">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi
               delectus vel culpa incidunt ad saepe dolorum accusamus similique
-              impedit. Tenetur illo autem reprehenderit placeat voluptatibus,
-              totam fugit maxime aspernatur possimus deserunt temporibus.
+              impedit.
             </p>
             {/* interact */}
             <div className="flex gap-6 items-center rounded-2xl">

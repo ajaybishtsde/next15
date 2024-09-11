@@ -64,7 +64,7 @@ const UserInfoCard = () => {
           </span>
         </div>
         {/* link */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center flex-wrap gap-2">
           <div className="flex items-center gap-2">
             <Image
               src={"/link.png"}

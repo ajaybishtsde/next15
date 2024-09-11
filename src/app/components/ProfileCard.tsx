@@ -6,7 +6,7 @@ const ProfileCard = () => {
   return (
     <>
       <div className="bg-white p-4 flex flex-col gap-6 rounded-lg">
-        <div className="relative bg-red-200 h-20">
+        <div className="relative h-20">
           <Image
             src={
               "https://images.unsplash.com/photo-1719937206498-b31844530a96?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8OHx8cGhvdG9ncmFwaHl8ZW58MHx8MHx8fDA%3D"

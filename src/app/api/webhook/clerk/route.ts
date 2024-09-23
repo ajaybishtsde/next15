@@ -1,6 +1,6 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { WebhookEvent } from "@clerk/nextjs/server";
+import { clerkClient, WebhookEvent } from "@clerk/nextjs/server";
 import Prisma from "@/app/lib/client";
 
 export async function POST(req: Request) {
@@ -54,17 +54,26 @@ export async function POST(req: Request) {
   const { id } = evt.data;
   const eventType = evt.type;
   // console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  // console.log("Webhook body:", body);
+  console.log("Webhook body:", JSON.parse(body));
   if (eventType === "user.created") {
     try {
-      await Prisma.user.create({
+      const newUser = await Prisma.user.create({
         data: {
-          id: evt.data.id,
+          clerkId: evt.data.id,
           username: JSON.parse(body).data.username,
           avatar: JSON.parse(body).data.image_url || "noAvatar.png",
           cover: "/noCover.png",
         },
       });
+      console.log("result", newUser);
+      if (newUser) {
+        await clerkClient.users.updateUserMetadata(id as string, {
+          privateMetadata: {
+            mongoId: newUser.id,
+          },
+        });
+      }
+
       return new Response("User has been created.", { status: 200 });
     } catch (error) {
       console.log("error", error);
@@ -73,9 +82,11 @@ export async function POST(req: Request) {
   }
   if (eventType === "user.updated") {
     try {
+      const getMongoId: any = await clerkClient.users.getUser(id as string);
+      console.log();
       await Prisma.user.update({
         where: {
-          id: evt.data.id,
+          id: getMongoId.privateMetadata.mongoId,
         },
         data: {
           username: JSON.parse(body).data.username,

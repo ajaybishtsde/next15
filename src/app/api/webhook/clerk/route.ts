@@ -54,7 +54,7 @@ export async function POST(req: Request) {
   const { id } = evt.data;
   const eventType = evt.type;
   // console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  console.log("Webhook body:", JSON.parse(body));
+  // console.log("Webhook body:", JSON.parse(body));
   if (eventType === "user.created") {
     try {
       const newUser = await Prisma.user.create({
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
   if (eventType === "user.updated") {
     try {
       const getMongoId: any = await clerkClient.users.getUser(id as string);
-      console.log();
+      // console.log("getMongoId", getMongoId);
       await Prisma.user.update({
         where: {
           id: getMongoId.privateMetadata.mongoId,

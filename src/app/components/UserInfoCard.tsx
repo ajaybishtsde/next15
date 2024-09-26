@@ -2,13 +2,55 @@ import { User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Prisma from "../lib/client";
+import RightMenuInteractionComp from "./RightMenuInteractionComp";
 
-const UserInfoCard = ({ user }: { user: User }) => {
+const UserInfoCard = async ({
+  user,
+  mongoId,
+}: {
+  user: User;
+  mongoId: string;
+}) => {
   const formatedDate = new Date(user.createdAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+  let isBlocked = false;
+  let isFollowing = false;
+  let isFollowRequestSent = false;
+  // check if user is bloked
+  if (mongoId) {
+    const res = await Prisma.block.findFirst({
+      where: {
+        blockerId: mongoId,
+        blockedId: user.id,
+      },
+    });
+    if (res) isBlocked = true;
+  } else isBlocked = false;
+  // check if user is following user
+  if (mongoId) {
+    const res = await Prisma.follower.findFirst({
+      where: {
+        userFollower: mongoId,
+        userFollowing: user.id,
+      },
+    });
+    if (res) isFollowing = true;
+  } else isFollowing = false;
+
+  // check if user has already sent follow request
+  if (mongoId) {
+    const res = await Prisma.followRequest.findFirst({
+      where: {
+        senderId: mongoId,
+        receiverId: user.id,
+      },
+    });
+    if (res) isFollowRequestSent = true;
+  } else isFollowRequestSent = false;
   return (
     <>
       <div className="bg-white p-4 shadow-2xl flex flex-col gap-4 rounded-lg">
@@ -106,12 +148,13 @@ const UserInfoCard = ({ user }: { user: User }) => {
             <span className="text-gray-600">Joined {formatedDate}</span>
           </div>
         </div>
-        <button className="bg-blue-400 text-white w-full p-1 rounded-lg">
-          Following
-        </button>
-        <div className="flex justify-end items-end text-xs text-red-400 cursor-pointer">
-          <span>Block User</span>
-        </div>
+        <RightMenuInteractionComp
+          userId={user.id}
+          currentUserId={mongoId}
+          isBlocked={isBlocked}
+          isFollowing={isFollowing}
+          isFolloweRequestSent={isFollowRequestSent}
+        />
       </div>
     </>
   );

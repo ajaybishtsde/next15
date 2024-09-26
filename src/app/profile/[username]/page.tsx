@@ -2,12 +2,17 @@ import Feed from "@/app/components/Feed";
 import LeftMenu from "@/app/components/LeftMenu";
 import RightMenu from "@/app/components/RightMenu";
 import Prisma from "@/app/lib/client";
-import { auth } from "@clerk/nextjs/server";
+import { useUser } from "@clerk/nextjs";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
 const ProfilePage = async ({ params }: { params: { username: string } }) => {
   const { username } = params;
+  // const { user: currentUser } = useUser();
+  const { userId } = auth();
+  const mongoId = (await clerkClient.users.getUser(userId as string))
+    .privateMetadata;
   const user = await Prisma.user.findFirst({
     where: {
       username,
@@ -25,16 +30,19 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
   console.log("user>>>>>>>>>>>>>>>>>>>", user);
   if (!user) return notFound();
 
-  const { userId: currentUserId } = auth();
   let isBlocked;
-  if (currentUserId) {
+  if (userId) {
+    console.log("crssss", userId);
     const res = await Prisma.block.findFirst({
       where: {
         blockerId: user.id,
-        blockedId: user.id,
+        blockedId: mongoId.mongoId as string,
       },
     });
-    if (res) isBlocked = true;
+    if (res) {
+      console.log("res>>>>>>>>>>>>", res);
+      isBlocked = true;
+    }
   } else isBlocked = false;
   if (isBlocked) return notFound();
   return (
@@ -91,7 +99,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         </div>
         {/* right */}
         <div className="hidden lg:block w-[30%] ">
-          <RightMenu user={user} />
+          <RightMenu user={user} mongoId={mongoId.mongoId as string} />
         </div>
       </div>
     </>

@@ -15,7 +15,11 @@ const RightMenuInteractionComp = ({
   return (
     <>
       <button className="bg-blue-400 text-white w-full p-1 rounded-lg">
-        Following
+        {isFollowing
+          ? "Following"
+          : isFolloweRequestSent
+          ? "Request Sent"
+          : "Follow"}
       </button>
       <div className="flex justify-end items-end text-xs text-red-400 cursor-pointer">
         <span>{isBlocked ? "Unblock User" : "Block User"}</span>

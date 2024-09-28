@@ -27,7 +27,6 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
       },
     },
   });
-  console.log("user>>>>>>>>>>>>>>>>>>>", user);
   if (!user) return notFound();
 
   let isBlocked;
@@ -40,7 +39,6 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
       },
     });
     if (res) {
-      console.log("res>>>>>>>>>>>>", res);
       isBlocked = true;
     }
   } else isBlocked = false;

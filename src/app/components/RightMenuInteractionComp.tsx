@@ -1,7 +1,7 @@
 "use client";
 
 import { useOptimistic, useState } from "react";
-import { switchFollow } from "../lib/actions";
+import { switchBlock, switchFollow } from "../lib/actions";
 
 const RightMenuInteractionComp = ({
   userId,
@@ -21,14 +21,23 @@ const RightMenuInteractionComp = ({
     blocked: isBlocked,
     followeRequestSent: isFolloweRequestSent,
   });
-  const [followText, switchFollowText] = useOptimistic(userState, (prev) => ({
-    ...prev,
-    following: prev.following && false,
-    followeRequestSent:
-      !prev.following && !prev.followeRequestSent ? true : false,
-  }));
+  const [followText, switchFollowText] = useOptimistic(
+    userState,
+    (prev, value: "follow" | "block") =>
+      value === "follow"
+        ? {
+            ...prev,
+            following: prev.following && false,
+            followeRequestSent:
+              !prev.following && !prev.followeRequestSent ? true : false,
+          }
+        : {
+            ...prev,
+            blocked: !prev.blocked,
+          }
+  );
   const follow = async () => {
-    switchFollowText("");
+    switchFollowText("follow");
     try {
       await switchFollow(userId, currentUserId);
       setUserState((prev) => ({
@@ -36,6 +45,19 @@ const RightMenuInteractionComp = ({
         following: prev.following && false,
         followeRequestSent:
           !prev.following && !prev.followeRequestSent ? true : false,
+      }));
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+  const block = async () => {
+    switchFollowText("block");
+    try {
+      console.log("bloack is caled");
+      await switchBlock(userId, currentUserId);
+      setUserState((prev) => ({
+        ...prev,
+        blocked: !prev.blocked,
       }));
     } catch (error) {
       console.log("error", error);
@@ -52,10 +74,10 @@ const RightMenuInteractionComp = ({
             : "Follow"}
         </button>
       </form>
-      <form action="">
-        <div className="flex justify-end items-end text-xs text-red-400 cursor-pointer">
+      <form action={block} className="self-end">
+        <button className="flex justify-end items-end text-xs text-red-400 cursor-pointer">
           <span>{followText.blocked ? "Unblock User" : "Block User"}</span>
-        </div>
+        </button>
       </form>
     </>
   );

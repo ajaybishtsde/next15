@@ -2,6 +2,7 @@
 
 import { useOptimistic, useState } from "react";
 import { switchBlock, switchFollow } from "../lib/actions";
+import { useFormStatus } from "react-dom";
 
 const RightMenuInteractionComp = ({
   userId,
@@ -66,21 +67,32 @@ const RightMenuInteractionComp = ({
   return (
     <>
       <form action={follow}>
-        <button className="bg-blue-400 text-white w-full p-1 rounded-lg">
-          {followText.following
-            ? "Following"
-            : followText.followeRequestSent
-            ? "Request Sent"
-            : "Follow"}
-        </button>
+        <FollowButton followText={followText} />
       </form>
       <form action={block} className="self-end">
-        <button className="flex justify-end items-end text-xs text-red-400 cursor-pointer">
-          <span>{followText.blocked ? "Unblock User" : "Block User"}</span>
-        </button>
+        <BlockButton followText={followText} />
       </form>
     </>
   );
 };
-
+function FollowButton({ followText }: { followText: any }) {
+  const { pending } = useFormStatus();
+  return (
+    <button className="bg-blue-400 text-white w-full p-1 rounded-lg">
+      {followText.following
+        ? "Following"
+        : followText.followeRequestSent
+        ? "Request Sent"
+        : "Follow"}
+    </button>
+  );
+}
+function BlockButton({ followText }: { followText: any }) {
+  const { pending } = useFormStatus();
+  return (
+    <button className="flex justify-end items-end text-xs text-red-400 cursor-pointer">
+      <span>{followText.blocked ? "Unblock User" : "Block User"}</span>
+    </button>
+  );
+}
 export default RightMenuInteractionComp;

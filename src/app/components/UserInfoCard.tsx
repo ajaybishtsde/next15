@@ -1,9 +1,11 @@
 import { User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import Prisma from "../lib/client";
 import RightMenuInteractionComp from "./RightMenuInteractionComp";
+import { currentUser } from "@clerk/nextjs/server";
+import UpdateUser from "./UpdateUser";
 
 const UserInfoCard = async ({
   user,
@@ -56,12 +58,16 @@ const UserInfoCard = async ({
       <div className="bg-white p-4 shadow-2xl flex flex-col gap-4 rounded-lg">
         <div className="flex justify-between">
           <span className="text-gray-600">User Information</span>
-          <Link
-            href={"/"}
-            className="text-blue-600 text-sm cursor-pointer items-center"
-          >
-            See all
-          </Link>
+          {user.id === mongoId ? (
+            <UpdateUser />
+          ) : (
+            <Link
+              href={"/"}
+              className="text-blue-600 text-sm cursor-pointer items-center"
+            >
+              See all
+            </Link>
+          )}
         </div>
         <div className="flex gap-3">
           <span className="text-xl">
@@ -148,13 +154,17 @@ const UserInfoCard = async ({
             <span className="text-gray-600">Joined {formatedDate}</span>
           </div>
         </div>
-        <RightMenuInteractionComp
-          userId={user.id}
-          currentUserId={mongoId}
-          isBlocked={isBlocked}
-          isFollowing={isFollowing}
-          isFolloweRequestSent={isFollowRequestSent}
-        />
+        {mongoId !== user.id && (
+          <Suspense fallback="loading.....">
+            <RightMenuInteractionComp
+              userId={user.id}
+              currentUserId={mongoId}
+              isBlocked={isBlocked}
+              isFollowing={isFollowing}
+              isFolloweRequestSent={isFollowRequestSent}
+            />
+          </Suspense>
+        )}
       </div>
     </>
   );

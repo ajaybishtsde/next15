@@ -1,6 +1,7 @@
 "use client";
 import { User } from "@prisma/client";
 import React, { useState } from "react";
+import { UpdateProfile } from "../lib/actions";
 
 const UpdateUser = ({ user, mongoId }: { user: User; mongoId: string }) => {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ const UpdateUser = ({ user, mongoId }: { user: User; mongoId: string }) => {
       {open && (
         <div className="absolute w-screen h-screen top-0 left-0 flex justify-center items-center bg-black bg-opacity-65 z-50">
           <form
-            action=""
+            action={UpdateProfile}
             className="p-10 bg-white shadow-lg rounded-xl flex flex-col w-full md:w-1/2 xl:w-2/5 relative gap-6"
           >
             <h2>Update Profile</h2>
@@ -44,7 +45,7 @@ const UpdateUser = ({ user, mongoId }: { user: User; mongoId: string }) => {
                   type="text"
                   name="firstName"
                   id=""
-                  placeholder="First name"
+                  placeholder={user.name || "First name"}
                   className="h-12 border-2 border-gray-500 p-2 rounded-md"
                 />
               </div>
@@ -54,7 +55,7 @@ const UpdateUser = ({ user, mongoId }: { user: User; mongoId: string }) => {
                   type="text"
                   name="surname"
                   id=""
-                  placeholder="Surname"
+                  placeholder={user.lastname || "Surname"}
                   className="h-12 border-2 border-gray-500 p-2 rounded-md"
                 />
               </div>
@@ -66,7 +67,7 @@ const UpdateUser = ({ user, mongoId }: { user: User; mongoId: string }) => {
                   type="text"
                   name=""
                   id=""
-                  placeholder="Life is beautifull...."
+                  placeholder={user.description || "Life is beautifull...."}
                   className="h-12 border-2 border-gray-500 p-2 rounded-md"
                 />
               </div>
@@ -76,7 +77,7 @@ const UpdateUser = ({ user, mongoId }: { user: User; mongoId: string }) => {
                   type="text"
                   name="city"
                   id=""
-                  placeholder="City"
+                  placeholder={user.city || "City"}
                   className="h-12 border-2 border-gray-500 p-2 rounded-md"
                 />
               </div>
@@ -86,7 +87,7 @@ const UpdateUser = ({ user, mongoId }: { user: User; mongoId: string }) => {
                   type="text"
                   name="school"
                   id=""
-                  placeholder="School"
+                  placeholder={user.school || "School"}
                   className="h-12 border-2 border-gray-500 p-2 rounded-md"
                 />
               </div>
@@ -96,7 +97,7 @@ const UpdateUser = ({ user, mongoId }: { user: User; mongoId: string }) => {
                   type="text"
                   name="work"
                   id=""
-                  placeholder="Work"
+                  placeholder={user.work || "Work"}
                   className="h-12 border-2 border-gray-500 p-2 rounded-md"
                 />
               </div>
@@ -106,14 +107,14 @@ const UpdateUser = ({ user, mongoId }: { user: User; mongoId: string }) => {
                   type="text"
                   name="website"
                   id=""
-                  placeholder="Website"
+                  placeholder={user.website || "Website"}
                   className="h-12 border-2 border-gray-500 p-2 rounded-md"
                 />
               </div>
             </div>
-            <div className="bg-blue-600 text-white rounded-md text-center py-3">
+            <button className="bg-blue-600 text-white rounded-md text-center py-3">
               Update
-            </div>
+            </button>
             <div
               className="font-bold absolute right-3 top-1 cursor-pointer"
               onClick={() => setOpen(false)}

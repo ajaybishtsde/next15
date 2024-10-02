@@ -122,3 +122,13 @@ export const deleteRequest = async (userId: string, currentUserId: string) => {
     return error;
   }
 };
+// Update Profile
+export const UpdateProfile = async (formData: FormData) => {
+  try {
+    const data = Object.fromEntries(formData);
+    console.log("data>>>>>>>>>>>>.", data);
+  } catch (error) {
+    console.log("error", error);
+    return error;
+  }
+};

@@ -2,6 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import Prisma from "./client";
+import { z } from "zod";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 
 // For switching following
 export const switchFollow = async (userId: string, currentUserId: string) => {
@@ -123,10 +125,39 @@ export const deleteRequest = async (userId: string, currentUserId: string) => {
   }
 };
 // Update Profile
-export const UpdateProfile = async (formData: FormData) => {
+export const UpdateProfile = async (formData: FormData, cover: string) => {
+  const { userId } = auth();
+  const mongoId = (await clerkClient.users.getUser(userId as string))
+    .privateMetadata;
   try {
     const data = Object.fromEntries(formData);
+    const filterdData = Object.fromEntries(
+      Object.entries(data).filter(([_, values]) => values !== "")
+    );
     console.log("data>>>>>>>>>>>>.", data);
+    const profile = z.object({
+      cover: z.string().optional(),
+      name: z.string().max(60).optional(),
+      lastname: z.string().max(60).optional(),
+      description: z.string().max(60).optional(),
+      city: z.string().max(60).optional(),
+      school: z.string().max(60).optional(),
+      work: z.string().max(60).optional(),
+      website: z.string().max(60).optional(),
+    });
+    const isFieldsValidated = profile.safeParse({ cover, ...filterdData });
+    if (!isFieldsValidated.success) {
+      console.log(isFieldsValidated.error.flatten().fieldErrors);
+      return isFieldsValidated;
+    }
+    const result = await Prisma.user.update({
+      where: {
+        id: mongoId.mongoId as string,
+      },
+      data: isFieldsValidated.data,
+    });
+    console.log("result<<<<<<<<<<>>>>>>>>>>>>>", result);
+    return result;
   } catch (error) {
     console.log("error", error);
     return error;

@@ -107,8 +107,7 @@ const UserInfoCard = async ({
               className="h-4 w-4"
             />
             <span className="text-gray-600">
-              Went to
-              <strong className="text-gray-600">{user.school}</strong>
+              Went to <strong className="text-gray-600">{user.school}</strong>
             </span>
           </div>
         )}

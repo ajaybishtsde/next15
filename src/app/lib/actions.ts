@@ -125,7 +125,11 @@ export const deleteRequest = async (userId: string, currentUserId: string) => {
   }
 };
 // Update Profile
-export const UpdateProfile = async (formData: FormData, cover: string) => {
+export const updateProfile = async (
+  prevState: { success: boolean; error: boolean },
+  payload: { formData: FormData; cover: string }
+) => {
+  const { cover, formData } = payload;
   const { userId } = auth();
   const mongoId = (await clerkClient.users.getUser(userId as string))
     .privateMetadata;
@@ -148,7 +152,7 @@ export const UpdateProfile = async (formData: FormData, cover: string) => {
     const isFieldsValidated = profile.safeParse({ cover, ...filterdData });
     if (!isFieldsValidated.success) {
       console.log(isFieldsValidated.error.flatten().fieldErrors);
-      return isFieldsValidated;
+      return { success: false, error: true };
     }
     const result = await Prisma.user.update({
       where: {
@@ -157,9 +161,9 @@ export const UpdateProfile = async (formData: FormData, cover: string) => {
       data: isFieldsValidated.data,
     });
     console.log("result<<<<<<<<<<>>>>>>>>>>>>>", result);
-    return result;
+    return { success: true, error: false };
   } catch (error) {
     console.log("error", error);
-    return error;
+    return { success: false, error: true };
   }
 };

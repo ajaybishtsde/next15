@@ -154,15 +154,13 @@ const UserInfoCard = async ({
           </div>
         </div>
         {mongoId !== user.id && (
-          <Suspense fallback="loading.....">
-            <RightMenuInteractionComp
-              userId={user.id}
-              currentUserId={mongoId}
-              isBlocked={isBlocked}
-              isFollowing={isFollowing}
-              isFolloweRequestSent={isFollowRequestSent}
-            />
-          </Suspense>
+          <RightMenuInteractionComp
+            userId={user.id}
+            currentUserId={mongoId}
+            isBlocked={isBlocked}
+            isFollowing={isFollowing}
+            isFolloweRequestSent={isFollowRequestSent}
+          />
         )}
       </div>
     </>

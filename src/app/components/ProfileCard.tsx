@@ -25,7 +25,7 @@ const ProfileCard = async () => {
       <div className="bg-white p-4 flex flex-col gap-6 rounded-lg">
         <div className="relative h-20">
           <Image
-            src={user?.cover || "./noCover.png"}
+            src={user?.cover || "/noCover.png"}
             alt="cover"
             fill
             className="w-full rounded-lg object-cover"

@@ -167,3 +167,34 @@ export const updateProfile = async (
     return { success: false, error: true };
   }
 };
+export const switchLikes = async (
+  formData: FormData,
+  currentUserId: string,
+  postId: string
+) => {
+  try {
+    const isLiked = await Prisma.like.findFirst({
+      where: {
+        postId,
+        userId: currentUserId,
+      },
+    });
+    if (isLiked) {
+      await Prisma.like.delete({
+        where: {
+          id: isLiked.id,
+        },
+      });
+    } else {
+      await Prisma.like.create({
+        data: {
+          postId,
+          userId: currentUserId,
+        },
+      });
+    }
+  } catch (error) {
+    console.log("error");
+    return error;
+  }
+};

@@ -2,6 +2,7 @@
 import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import React, { useOptimistic, useState } from "react";
+import { switchLikes } from "../lib/actions";
 
 const PostInteraction = ({
   postId,
@@ -27,17 +28,30 @@ const PostInteraction = ({
       };
     }
   );
-  //   const likeAction=async ()=>{
-
-  //   }
+  const likeAction = async (
+    formData: FormData,
+    currentUserId: string,
+    postId: string
+  ) => {
+    switchOptimisticLikes("");
+    try {
+      switchLikes(formData, currentUserId, postId);
+      setLikeState((state) => ({
+        likesCount: state.isLiked ? state.likesCount - 1 : state.likesCount + 1,
+        isLiked: !state.isLiked,
+      }));
+    } catch (error) {
+      console.log(error, error);
+    }
+  };
   return (
     <div className="flex items-center justify-between">
       <div className="flex gap-8">
         <div className="flex items-center bg-slate-50 gap-2 rounded-2xl">
-          <form action={likeAction}>
+          <form action={(formData) => likeAction(formData, userId, postId)}>
             <button>
               <Image
-                src={optimisticLikes.isLiked ? "/likeed.png" : "/like.png"}
+                src={optimisticLikes.isLiked ? "/liked.png" : "/like.png"}
                 alt="like"
                 width={16}
                 height={16}

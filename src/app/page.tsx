@@ -1,9 +1,12 @@
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import AddPost from "./components/AddPost";
 import Feed from "./components/Feed";
 import LeftMenu from "./components/LeftMenu";
 import RightMenu from "./components/RightMenu";
 import Stories from "./components/Stories";
-
+const { userId } = auth();
+const mongoId = (await clerkClient.users.getUser(userId as string))
+  .privateMetadata;
 export default function Homepage() {
   return (
     <>
@@ -16,7 +19,7 @@ export default function Homepage() {
         <div className="w-full lg:w-[70%] xl:w-[50%] ">
           <div className="flex flex-col gap-6">
             <Stories />
-            <AddPost />
+            <AddPost userId={mongoId.mongoId as string} />
             <Feed />
           </div>
         </div>

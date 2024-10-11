@@ -198,3 +198,53 @@ export const switchLikes = async (
     return error;
   }
 };
+export const addComment = async (
+  postId: string,
+  desc: string,
+  userId: string
+) => {
+  try {
+    const result = Prisma.comment.create({
+      data: {
+        userId,
+        postId,
+        desc,
+      },
+      include: {
+        user: true,
+      },
+    });
+    console.log("result,>>>>>>>>>>commnet", result);
+    return result;
+  } catch (error) {
+    console.log("error", error);
+    return error;
+  }
+};
+export const addPost = async (
+  formData: FormData,
+  image: string,
+  userId: string
+) => {
+  try {
+    console.log("herer", image);
+    const desc = formData.get("desc");
+    const Desc = z.string().min(1).max(250);
+    const validateDesc = Desc.safeParse(desc);
+    if (!validateDesc.success) {
+      // console.log("NO descricption is provided");
+      return;
+    }
+    const result = await Prisma.post.create({
+      data: {
+        desc: validateDesc.data,
+        userId,
+        img: image,
+      },
+    });
+    revalidatePath("/");
+  } catch (error) {
+    console.log("error", error);
+    return error;
+  }
+};

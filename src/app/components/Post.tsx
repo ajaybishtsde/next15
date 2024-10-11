@@ -54,7 +54,7 @@ const Post = ({ post, userId }: { post: postType; userId: string }) => {
         postId={post.id}
         userId={userId}
       />
-      <Comments />
+      <Comments postId={post.id} userid={userId} />
     </div>
   );
 };

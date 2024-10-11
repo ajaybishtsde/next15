@@ -1,5 +1,4 @@
 "use client";
-import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import React, { useOptimistic, useState } from "react";
 import { switchLikes } from "../lib/actions";
@@ -75,7 +74,8 @@ const PostInteraction = ({
           />
           <span className="text-gray-400">|</span>
           <span className="text-gray-400">
-            123 <span className="hidden md:inline">Comments</span>
+            {commentNumber}
+            <span className="hidden md:inline"> Comments</span>
           </span>
         </div>
       </div>
